@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 12:28:00 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/24 13:23:08 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ long	ft_matoi(const char *str)
 	return (sign * resu);
 }
 
-int	stack_size(int *stack)
-{
-	int	i;
+// int	stack_size(int *stack)
+// {
+// 	int	i;
 
-	i = 0;
-	while (stack[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (stack[i])
+// 		i++;
+// 	return (i);
+// }
 
 void	free_all(t_data *data, int error)
 {

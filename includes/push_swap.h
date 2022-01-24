@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 12:32:11 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:34:03 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,18 @@ int		is_integer(int argc, char **argv);
 int		args_validation(int argc, char **argv);
 void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack);
 void	push(t_stack *stack_src, t_stack *stack_dest);
-void	swap(int *stack);
-void	rotate(int *stack);
-void	rrotate(int *stack);
+void	swap(t_stack *stack);
+void	rotate(t_stack *stack);
+void	rrotate(t_stack *stack);
 void	operations(char *op, t_data *conjunct);
-int		stack_size(int *stack);
 void	free_all(t_data *data, int error);
 int		get_lower(int *stack, t_data *conjunct);
 int		get_higher(int *stack, t_data *conjunct);
 int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
-int		stack_sizep(int *stack);
+void	push_swap(t_data *conjunct);
+int		is_sorted(t_stack *stack);
+void	sort_stack(t_data *conjunct);
+void	sort_short(t_data *conjunct);
+
 
 #endif

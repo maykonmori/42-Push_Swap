@@ -26,8 +26,11 @@ static void	double_operation(char *op, t_data *conjunct)
 
 void	operations(char *op, t_data *conjunct)
 {
-	if (ft_strncmp(op, "sa\n", 3))
+	if (ft_strncmp(op, "sa", 3))
+	{
 		swap(conjunct->stack_a);
+		write(2, op, ft_strlen(op));
+	}
 	else if (ft_strncmp(op, "sb\n", 3))
 		swap(conjunct->stack_b);
 	else if (ft_strncmp(op, "pa\n", 3))

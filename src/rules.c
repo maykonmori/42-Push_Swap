@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 19:09:54 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/23 18:16:32 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/24 17:35:46 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,61 +26,54 @@
 
 void	push(t_stack *stack_src, t_stack *stack_dest)
 {
-	int	src_size;
-	int	dest_size;
-
-
-	src_size = stack_size(stack_src->stack);
-	dest_size = stack_size(stack_dest->stack);
 	stack_dest->top++;
-	stack_dest[dest_size] = stack_src[src_size - 1];
+	stack_dest->stack[stack_dest->top] = stack_src->stack[stack_src->top];
 	stack_src->top--;
-	stack_src[src_size - 1] = stack_src[src_size]; //VERIFICAAAAR DPS
 }
 
-void	swap(int *stack)
+void	swap(t_stack *stack)
 {
 	int	aux;
 	int	height;
 
-	height = stack_size(stack);
-	aux = stack[height - 1];
-	stack[height - 1] = stack[height - 2];
-	stack[height - 2] = aux;
+	height = stack->top;
+	aux = stack->stack[height];
+	stack->stack[height] = stack->stack[height - 1];
+	stack->stack[height - 1] = aux;
 }
 
-void	rotate(int *stack)
+void	rotate(t_stack *stack)
 {
 	int	aux;
 	int	height;
 
-	height = stack_size(stack);
+	height = stack->top;
 	if (height < 2)
 		return ;
-	aux = stack[height - 1];
+	aux = stack->stack[height];
 	while (height > 0)
 	{
-		stack[height] = stack[height - 1];
+		stack->stack[height] = stack->stack[height - 1];
 		height--;
 	}
-	stack[height] = aux;
+	stack->stack[height] = aux;
 }
 
-void	rrotate(int *stack)
+void	rrotate(t_stack *stack)
 {
 	int	aux;
 	int	height;
 	int i;
 
 	i = 0;
-	height = stack_size(stack);
+	height = stack->top;
 	if (height < 2)
 		return ;
-	aux = stack[0];
+	aux = stack->stack[0];
 	while (i < height)
 	{
-		stack[i] = stack[i + 1];
+		stack->stack[i] = stack->stack[i + 1];
 		i++;
 	}
-	stack[height - 1] = aux;
+	stack->stack[height] = aux;
 }
