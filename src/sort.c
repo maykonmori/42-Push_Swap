@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:54:56 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 18:07:29 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:42:38 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ int	is_sorted(t_stack *stack)
 
 	i = stack->top;
 	if (stack->top == -1)
+	{
+		// printf("entrou no -1\n");
 		return (EXIT_SUCCESS);
-	while (i >= 1)
+	}
+	while (i >= 0)
 	{
 		if (stack->stack[i] < stack->stack[i - 1])
 			return (EXIT_FAILURE);
@@ -43,18 +46,19 @@ void	sort_stack(t_data *conjunct)
 
 void	sort_short(t_data *conjunct)
 {
-	if (conjunct->stack_a->top == 1)
-	{
-		printf("chegou aqui\n");
-		operations("sa\n", conjunct);
-	}
-	// else if (/* condition */)
+	// while (1)
 	// {
-	// 	/* code */
+		if(is_sorted(conjunct->stack_a))
+			return ;
+		else if (conjunct->stack_a->stack[conjunct->stack_a->top] == conjunct->num_higher)
+		{
+			operations("ra\n", conjunct);
+		}
+		else if (conjunct->stack_a->stack[1] > conjunct->stack_a->stack[0])
+		{
+			printf("sa\n");
+			operations("sa\n", conjunct);
+		}
 	// }
-	// else
-	// {
-	// 	/* code */
-	// }
-
+		// && conjunct->stack_a->top < 1)
 }

@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 17:55:18 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/25 18:49:59 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
 	conjunct->stack_b->stack = (int *)ft_calloc(sizeof(int), (conjunct->size + 1));
 	conjunct->stack_b->top = -1;
 	conjunct->stack_a->stack = atribute_stack(conjunct, conjunct->stack_a, argv);
-	conjunct->num_lower = get_lower(conjunct->stack_a->stack, conjunct);
-	conjunct->num_higher = get_higher(conjunct->stack_a->stack, conjunct);
+	conjunct->num_lower = get_lower(conjunct->stack_a);
+	conjunct->num_higher = get_higher(conjunct->stack_a);
 	return (conjunct);
 }
 
@@ -55,41 +55,46 @@ int main(int argc, char **argv)
 	conjunct = (t_data *)ft_calloc(sizeof(t_data), 1);
 	stack = (t_stack *)ft_calloc(sizeof(t_stack), 1);
 	init(argc, argv, conjunct, stack);
-	push_swap(conjunct);
 
-	// int	i;
-	// i = conjunct->stack_a->top;
-	// while (i > -1)
-	// {
-	// 	printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i]);
-	// 	i--;
-	// }
-	// i = conjunct->stack_b->top;
-	// while (i > -1)
-	// {
-	// 	printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
-	// 	i--;
-	// }
-	// printf("\n");
+	int	i;
+	i = conjunct->stack_a->top;
+	while (i > -1)
+	{
+		printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i]);
+		i--;
+	}
+	i = conjunct->stack_b->top;
+	while (i > -1)
+	{
+		printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
+		i--;
+	}
+	printf("\n");
 
-	// swap (conjunct->stack_a);
+	// push_swap(conjunct);
+	printf("top %d\n", conjunct);
+	if (conjunct->stack_a->stack[conjunct->stack_a->top] == conjunct->num_higher)
+		{
+			operations("ra\n", conjunct);
+		}
 	// rotate(conjunct->stack_a);
-	// rrotate(conjunct->stack_a);
-	// // push(conjunct->stack_a, conjunct->stack_b);
 
-	// i = conjunct->stack_a->top;
-	// while (i > -1)
-	// {
-	// 	printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i] );
-	// 	i--;
-	// }
-	// i = conjunct->stack_b->top;
-	// while (i > -1)
-	// {
-	// 	printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
-	// 	i--;
-	// }
-	// printf("\n");
+
+	i = conjunct->stack_a->top;
+	while (i > -1)
+	{
+		printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i] );
+		i--;
+	}
+	i = conjunct->stack_b->top;
+	while (i > -1)
+	{
+		printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
+		i--;
+	}
+	printf("\n");
+
+
 
 	// push(conjunct->stack_b, conjunct->stack_a);
 
@@ -107,4 +112,5 @@ int main(int argc, char **argv)
 	// }
 	// printf("\n");
 	// return (0);
+	// free_all(conjunct, EXIT_SUCCESS);
 }

@@ -6,19 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 19:09:54 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 17:35:46 by mjose-ye         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ps_rules.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jofelipe <jofelipe@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 20:45:01 by jofelipe          #+#    #+#             */
-/*   Updated: 2021/12/06 22:59:21 by jofelipe         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:38:13 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +36,8 @@ void	rotate(t_stack *stack)
 	int	height;
 
 	height = stack->top;
-	if (height < 2)
+	printf("height do ra %d\n", height);
+	if (height < 1)
 		return ;
 	aux = stack->stack[height];
 	while (height > 0)
@@ -67,7 +56,7 @@ void	rrotate(t_stack *stack)
 
 	i = 0;
 	height = stack->top;
-	if (height < 2)
+	if (height < 1)
 		return ;
 	aux = stack->stack[0];
 	while (i < height)

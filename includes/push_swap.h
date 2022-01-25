@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 17:34:03 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/25 17:15:30 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	rotate(t_stack *stack);
 void	rrotate(t_stack *stack);
 void	operations(char *op, t_data *conjunct);
 void	free_all(t_data *data, int error);
-int		get_lower(int *stack, t_data *conjunct);
-int		get_higher(int *stack, t_data *conjunct);
+int		get_lower(t_stack *stack);
+int		get_higher(t_stack *stack);
 int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
 void	push_swap(t_data *conjunct);
 int		is_sorted(t_stack *stack);

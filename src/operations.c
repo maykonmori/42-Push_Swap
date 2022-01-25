@@ -24,12 +24,18 @@ static void	double_operation(char *op, t_data *conjunct)
 	}
 }
 
-void	operations(char *op, t_data *conjunct)
+void	 operations(char *op, t_data *conjunct)
 {
-	if (ft_strncmp(op, "sa", 3))
+	printf("antes de entrar do if %s\n", op);
+	if (ft_strncmp(op, "sa\n", 3))
 	{
+		printf("strncmp %d\n", ft_strncmp(op, "sa\n", 3));
+		printf("entrou no SWAP %s\n", op);
 		swap(conjunct->stack_a);
-		write(2, op, ft_strlen(op));
+		printf("%d\n", conjunct->stack_a->stack[2]);
+		printf("%d\n", conjunct->stack_a->stack[1]);
+		printf("%d\n", conjunct->stack_a->stack[0]);
+		// write(2, op, ft_strlen(op));
 	}
 	else if (ft_strncmp(op, "sb\n", 3))
 		swap(conjunct->stack_b);
@@ -38,7 +44,10 @@ void	operations(char *op, t_data *conjunct)
 	else if (ft_strncmp(op, "pb\n", 3))
 		push(conjunct->stack_a, conjunct->stack_b);
 	else if (ft_strncmp(op, "ra\n", 3))
+	{
+		printf("ROTATE");
 		rotate(conjunct->stack_a);
+	}
 	else if (ft_strncmp(op, "rb\n", 3))
 		rotate(conjunct->stack_b);
 	else if (ft_strncmp(op, "rra\n", 4))
@@ -47,6 +56,9 @@ void	operations(char *op, t_data *conjunct)
 		rrotate(conjunct->stack_b);
 	else
 		double_operation(op, conjunct);
+	printf("saiu do if %s\n", op);
 	conjunct->res_step = ft_strjoin(conjunct->res_step, op);
+	printf("saiu do if %s\n", conjunct->res_step);
+	// ft_putstr_fd(conjunct->res_step, 1);
 	conjunct->steps++;
 }

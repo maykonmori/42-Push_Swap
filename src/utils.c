@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/24 13:23:08 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/25 16:17:12 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,55 @@ void	free_all(t_data *data, int error)
 	exit(0);
 }
 
-int	get_higher(int *stack, t_data *conjunct)
+int	get_higher(t_stack *stack)
 {
 	int	i;
 	int	aux;
 
-	i = conjunct->size;
-	aux = stack[i];
-	while (i == -1)
+	i = stack->top;
+	aux = stack->stack[i];
+	while (i > -1)
 	{
-		if (stack[i] > aux)
-			aux = stack[i];
+		if (stack->stack[i] > aux)
+			aux = stack->stack[i];
 		--i;
 	}
 	return (aux);
 }
 
-int	get_lower(int *stack, t_data *conjunct)
+int	get_lower(t_stack *stack)
 {
 	int	i;
 	int	aux;
 
-	i = conjunct->size;
-	aux = stack[i];
-	while (i == -1)
+	i = stack->top;
+	aux = stack->stack[i];
+	while (i > -1)
 	{
-		if (stack[i] < aux)
-			aux = stack[i];
+		if (stack->stack[i] < aux)
+			aux = stack->stack[i];
 		--i;
 	}
 	return (aux);
 }
+
+// int	get_lower(int *stack)
+// {
+// 	int	i;
+// 	int	aux;
+
+// 	i = 0;
+// 	printf("size do get lower: %i\n\n", i);
+// 	aux = stack[i];
+// 	while (stack[i])
+// 	{
+// 		printf("stack[i]: %i\n\n", stack[i]);
+// 		if (stack[i] < aux)
+// 			aux = stack[i];
+// 		++i;
+// 	}
+// 	return (aux);
+// }
 
 int	*atribute_stack(t_data *conjunct, t_stack *stack, char **argv)
 {
