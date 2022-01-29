@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:54:56 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/28 22:45:53 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/29 15:39:29 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	is_sorted(t_stack *stack)
 		else
 			i--;
 	}
-	printf("saio do while do is_sorted\n");
 	return (1);
 }
 
@@ -44,34 +43,33 @@ int	is_sortedb(t_stack *stack)
 		else
 			i--;
 	}
-	printf("saio do while do is_sortedb\n");
 	return (1);
 }
 
-static void sort_short_b(t_data *conjunct)
+static void sort_short_b(t_data *conjunct, t_stack *stack)
 {
 	while (1)
 	{
 		if(is_sortedb)
 		{
 			while (conjunct->stack_b->top != -1)
-				operations("pa\n", conjunct);
+				operations("pa\n", conjunct, stack);
 			break ;
 		}
 		if (conjunct->stack_b->stack[conjunct->stack_b->top] == conjunct->numb_lower)
-			operations("rb\n", conjunct);
+			operations("rb\n", conjunct, stack);
 		else if (conjunct->stack_b->stack[0] == conjunct->numb_lower)
-			operations("rrb\n", conjunct);
+			operations("rrb\n", conjunct, stack);
 		else if (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1])
-			operations("sb\n", conjunct);
+			operations("sb\n", conjunct, stack);
 		else
-			operations("rb\n", conjunct);
+			operations("rb\n", conjunct, stack);
 	}
 
 }
 
 
-static void	sort_short(t_data *conjunct)
+static void	sort_short(t_data *conjunct, t_stack *stack)
 {
 	while(1)
 	{
@@ -80,27 +78,27 @@ static void	sort_short(t_data *conjunct)
 			if(!is_sortedb(conjunct->stack_b) && conjunct->stack_b->top == -1)
 				break;
 			else
-				sort_short_b(conjunct);
+				sort_short_b(conjunct, stack);
 		}
 		else if (conjunct->stack_a->stack[conjunct->stack_a->top] == \
 		conjunct->num_higher && conjunct->stack_a->top > 1)
-			operations("ra\n", conjunct);
+			operations("ra\n", conjunct, stack);
 		else if (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1] && conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1] && conjunct->stack_b->stack[conjunct->stack_b->top] != conjunct->numb_higher)
-			operations("ss\n", conjunct);
+			operations("ss\n", conjunct, stack);
 		else if (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1])
-			operations("sa\n", conjunct);
+			operations("sa\n", conjunct, stack);
 		else if (conjunct->stack_a->stack[conjunct->stack_a->top] != conjunct->num_lower || conjunct->stack_a->stack[conjunct->stack_a->top]!= conjunct->num_higher)
-			operations("pb\n", conjunct);
+			operations("pb\n", conjunct, stack);
 		else
-			operations("rr\n", conjunct);
+			operations("rr\n", conjunct, stack);
 	}
 }
 
-void	sort_stack(t_data *conjunct)
+void	sort_stack(t_data *conjunct, t_stack *stack)
 {
 	if (conjunct->stack_a->top <= 9)
 	{
-		sort_short(conjunct);
+		sort_short(conjunct, stack);
 	}
 	// else
 	// {

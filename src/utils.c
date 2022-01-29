@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/25 16:17:12 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/28 23:27:35 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,14 @@ long	ft_matoi(const char *str)
 	return (sign * resu);
 }
 
-// int	stack_size(int *stack)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (stack[i])
-// 		i++;
-// 	return (i);
-// }
-
-void	free_all(t_data *data, int error)
+void	free_all(t_data *conjunct, t_stack *stack, int error)
 {
-	free(data->stack_a);
-	free(data->stack_b);
-	free(data);
+	free(stack->stack);
+	free(conjunct->stack_a);
+	free(conjunct->stack_b);
+	free(conjunct);
+	free(stack);
+
 	if (error == EXIT_FAILURE)
 		exit(1);
 	exit(0);
@@ -96,24 +89,6 @@ int	get_lower(t_stack *stack)
 	return (aux);
 }
 
-// int	get_lower(int *stack)
-// {
-// 	int	i;
-// 	int	aux;
-
-// 	i = 0;
-// 	printf("size do get lower: %i\n\n", i);
-// 	aux = stack[i];
-// 	while (stack[i])
-// 	{
-// 		printf("stack[i]: %i\n\n", stack[i]);
-// 		if (stack[i] < aux)
-// 			aux = stack[i];
-// 		++i;
-// 	}
-// 	return (aux);
-// }
-
 int	*atribute_stack(t_data *conjunct, t_stack *stack, char **argv)
 {
 	int	i;
@@ -129,4 +104,28 @@ int	*atribute_stack(t_data *conjunct, t_stack *stack, char **argv)
 		i++;
 	}
 	return (stack->stack);
+}
+
+char	*insert_command(char const *s1, char const *s2)
+{
+	size_t	cont1;
+	size_t	cont2;
+	size_t	ts1;
+	size_t	ts2;
+	char	*dest;
+
+	cont1 = 0;
+	cont2 = 0;
+	if (!s2)
+		return (NULL);
+	ts1 = ft_strlen(s1);
+	ts2 = ft_strlen(s2);
+	dest = ft_calloc((ts1 + ts2 + 1), sizeof(char));
+	if (dest == 0)
+		return (NULL);
+	while (s1[cont1++] != '\0')
+		dest[cont1 - 1] = s1[cont1 - 1];
+	while (s2[cont2++] != '\0')
+		dest[(cont1 - 1) + (cont2 - 1)] = s2[cont2 - 1];
+	return (dest);
 }

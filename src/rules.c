@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 19:09:54 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/25 19:38:13 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/28 23:07:18 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	rotate(t_stack *stack)
 	int	height;
 
 	height = stack->top;
-	printf("height do ra %d\n", height);
 	if (height < 1)
 		return ;
 	aux = stack->stack[height];

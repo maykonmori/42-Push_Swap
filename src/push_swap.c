@@ -6,16 +6,16 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/27 23:09:45 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/29 15:28:14 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(t_data *conjunct)
+void	push_swap(t_data *conjunct, t_stack *stack)
 {
 	if (!is_sorted(conjunct->stack_a))
-		sort_stack(conjunct);
+		sort_stack(conjunct, stack);
 }
 
 void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
@@ -58,38 +58,38 @@ int main(int argc, char **argv)
 	stack = (t_stack *)ft_calloc(sizeof(t_stack), 1);
 	init(argc, argv, conjunct, stack);
 
-	int	i;
-	i = conjunct->stack_a->top;
-	while (i > -1)
-	{
-		printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i]);
-		i--;
-	}
-	i = conjunct->stack_b->top;
-	while (i > -1)
-	{
-		printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
-		i--;
-	}
-	printf("\n");
+	// int	i;
+	// i = conjunct->stack_a->top;
+	// while (i > -1)
+	// {
+	// 	printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i]);
+	// 	i--;
+	// }
+	// i = conjunct->stack_b->top;
+	// while (i > -1)
+	// {
+	// 	printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
+	// 	i--;
+	// }
+	// printf("\n");
 
-	push_swap(conjunct);
+	push_swap(conjunct, stack);
 
 	// rotate(conjunct->stack_a);
 
-	i = conjunct->stack_a->top;
-	while (i > -1)
-	{
-		printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i] );
-		i--;
-	}
-	i = conjunct->stack_b->top;
-	while (i > -1)
-	{
-		printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
-		i--;
-	}
-	printf("\n");
+	// i = conjunct->stack_a->top;
+	// while (i > -1)
+	// {
+	// 	printf("i = %d, a =%d\n", i, conjunct->stack_a->stack[i] );
+	// 	i--;
+	// }
+	// i = conjunct->stack_b->top;
+	// while (i > -1)
+	// {
+	// 	printf("i = %d, b =%d\n", i, conjunct->stack_b->stack[i]);
+	// 	i--;
+	// }
+	// printf("\n");
 
 
 
@@ -109,5 +109,6 @@ int main(int argc, char **argv)
 	// }
 	// printf("\n");
 	// return (0);
-	// free_all(conjunct, EXIT_SUCCESS);
+	write(1, conjunct->res_step, ft_strlen(conjunct->res_step));
+	free_all(conjunct, stack, EXIT_SUCCESS);
 }

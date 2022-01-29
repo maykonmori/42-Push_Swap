@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/28 13:58:03 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/29 15:27:05 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ void	push(t_stack *stack_src, t_stack *stack_dest);
 void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	rrotate(t_stack *stack);
-void	operations(char *op, t_data *conjunct);
-void	free_all(t_data *data, int error);
+void	 operations(char *op, t_data *conjunct, t_stack *stack) ;
+void	free_all(t_data *conjunct, t_stack *stack, int error);
 int		get_lower(t_stack *stack);
 int		get_higher(t_stack *stack);
 int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
-void	push_swap(t_data *conjunct);
+void	push_swap(t_data *conjunct, t_stack *stack);
 int		is_sorted(t_stack *stack);
-void	sort_stack(t_data *conjunct);
-// void	sort_short(t_data *conjunct);
+void	sort_stack(t_data *conjunct, t_stack *stack);
+char	*insert_command(char const *s1, char const *s2);
 
 
 #endif
