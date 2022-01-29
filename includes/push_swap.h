@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/25 17:15:30 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/28 13:58:03 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_data
 	t_stack		*stack_b;
 	int		num_lower;
 	int		num_higher;
+	int		numb_lower;
+	int		numb_higher;
 	int		direction;
 	int		size;
 	char	*res_step;
@@ -62,7 +64,7 @@ int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
 void	push_swap(t_data *conjunct);
 int		is_sorted(t_stack *stack);
 void	sort_stack(t_data *conjunct);
-void	sort_short(t_data *conjunct);
+// void	sort_short(t_data *conjunct);
 
 
 #endif

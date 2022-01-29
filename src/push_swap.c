@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/25 18:49:59 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/27 23:09:45 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
 	conjunct->stack_a->stack = atribute_stack(conjunct, conjunct->stack_a, argv);
 	conjunct->num_lower = get_lower(conjunct->stack_a);
 	conjunct->num_higher = get_higher(conjunct->stack_a);
+	conjunct->numb_lower = get_lower(conjunct->stack_b);
+	conjunct->numb_higher = get_higher(conjunct->stack_b);
 	return (conjunct);
 }
 
@@ -71,14 +73,9 @@ int main(int argc, char **argv)
 	}
 	printf("\n");
 
-	// push_swap(conjunct);
-	printf("top %d\n", conjunct);
-	if (conjunct->stack_a->stack[conjunct->stack_a->top] == conjunct->num_higher)
-		{
-			operations("ra\n", conjunct);
-		}
-	// rotate(conjunct->stack_a);
+	push_swap(conjunct);
 
+	// rotate(conjunct->stack_a);
 
 	i = conjunct->stack_a->top;
 	while (i > -1)

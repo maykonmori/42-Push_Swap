@@ -6,7 +6,7 @@
 #    By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:06:31 by mjose-ye          #+#    #+#              #
-#    Updated: 2022/01/24 16:00:43 by mjose-ye         ###   ########.fr        #
+#    Updated: 2022/01/27 17:50:22 by mjose-ye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ SRC =	$(addprefix $(FOLDER), \
 
 OBJS	= ${SRC:%.c=%.o} ${UTILS:%.c=%.o}
 
-CC = gcc
+CC = gcc -g
 
-# CFLAGS = -Wextra -Werror -Wall -g
+# CFLAGS = -Wextra -Werror -Wall
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
