@@ -6,7 +6,7 @@
 #    By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:06:31 by mjose-ye          #+#    #+#              #
-#    Updated: 2022/01/27 17:50:22 by mjose-ye         ###   ########.fr        #
+#    Updated: 2022/01/30 11:07:05 by mjose-ye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC =	$(addprefix $(FOLDER), \
 		validations.c \
 		operations.c \
 		rules.c \
-		sort.c)
+		sort.c\
+		long_sort.c)
 
 OBJS	= ${SRC:%.c=%.o} ${UTILS:%.c=%.o}
 

@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:54:56 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/29 15:39:29 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/29 20:22:16 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	sort_short(t_data *conjunct, t_stack *stack)
 	{
 		if(is_sorted(conjunct->stack_a))
 		{
-			if(!is_sortedb(conjunct->stack_b) && conjunct->stack_b->top == -1)
+			if(conjunct->stack_b->top == -1)
 				break;
 			else
 				sort_short_b(conjunct, stack);
@@ -100,9 +100,9 @@ void	sort_stack(t_data *conjunct, t_stack *stack)
 	{
 		sort_short(conjunct, stack);
 	}
-	// else
-	// {
-	// 	sort_long(stack_a, stack_b);
-	// }
+	else
+	{
+		sort_long(conjunct, stack);
+	}
 
 }

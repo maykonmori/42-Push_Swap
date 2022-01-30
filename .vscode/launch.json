@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/home/cakomori/42SP/42-Push_Swap/push_swap",
-			"args": ["3", "2"],
+			"args": ["20", "-41", "37", "-47", "-18", "-37", "-43", "2", "3", "17", "-49"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],

@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/28 23:27:35 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/29 18:53:50 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,28 +104,4 @@ int	*atribute_stack(t_data *conjunct, t_stack *stack, char **argv)
 		i++;
 	}
 	return (stack->stack);
-}
-
-char	*insert_command(char const *s1, char const *s2)
-{
-	size_t	cont1;
-	size_t	cont2;
-	size_t	ts1;
-	size_t	ts2;
-	char	*dest;
-
-	cont1 = 0;
-	cont2 = 0;
-	if (!s2)
-		return (NULL);
-	ts1 = ft_strlen(s1);
-	ts2 = ft_strlen(s2);
-	dest = ft_calloc((ts1 + ts2 + 1), sizeof(char));
-	if (dest == 0)
-		return (NULL);
-	while (s1[cont1++] != '\0')
-		dest[cont1 - 1] = s1[cont1 - 1];
-	while (s2[cont2++] != '\0')
-		dest[(cont1 - 1) + (cont2 - 1)] = s2[cont2 - 1];
-	return (dest);
 }
