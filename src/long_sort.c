@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/31 15:18:00 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/31 15:30:23 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,12 @@ void sort_long(t_data *conjunct, t_stack * stack)
 		middle = conjunct->stack_a->top / 2;
 		pos_lower = locate_lower(conjunct);
 		pos_higher = locate_higher(conjunct);
-		if(is_sorted(conjunct->stack_a))
+		if(conjunct->stack_b->top == -1 && is_sorted(conjunct->stack_a))
 		{
-			if(conjunct->stack_b->top == -1)
-				break;
-			else
-				sort_long_b(conjunct, stack);
+			break;
 		}
+		else if (is_sorted(conjunct->stack_a))
+			sort_long_b(conjunct, stack);
 		else if(test_negative(middle - pos_lower) >= test_negative(middle - pos_higher))
 		{
 			if(middle - pos_lower <= 0)
