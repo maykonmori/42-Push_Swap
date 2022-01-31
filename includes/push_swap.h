@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/30 18:20:17 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/31 13:20:38 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data
 	int	index;
 	t_stack		*stack_a;
 	t_stack		*stack_b;
+	t_stack		*stack_aux;
 	int		num_lower;
 	int		num_higher;
 	int		numb_lower;

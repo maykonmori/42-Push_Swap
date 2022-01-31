@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/30 15:44:22 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/31 14:55:05 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int main(int argc, char **argv)
 	argc--;
 	if (args_validation(argc, argv))
 	{
-		write(2, "\033[31mERROR \e[0m\n", 17);
+		// write(2, "\033[31mERROR \e[0m\n", 17);
+		write(2, "Error\n", 6);
 		return(1);
 	}
 	conjunct = (t_data *)ft_calloc(sizeof(t_data), 1);
