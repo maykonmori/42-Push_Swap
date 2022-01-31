@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/30 11:06:25 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/30 18:20:17 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int		is_sorted(t_stack *stack);
 void	sort_stack(t_data *conjunct, t_stack *stack);
 char	*insert_command(char const *s1, char const *s2);
 void	sort_long(t_data *conjunct, t_stack * stack);
-
 
 #endif

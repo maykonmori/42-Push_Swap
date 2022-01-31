@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/30 14:29:21 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/01/30 15:44:22 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,6 @@ int main(int argc, char **argv)
 	// printf("\n");
 	// return (0);
 	write(1, conjunct->res_step, ft_strlen(conjunct->res_step));
-	printf("%d\n", conjunct->steps);
+	// printf("%d\n", conjunct->steps);
 	free_all(conjunct, stack, EXIT_SUCCESS);
 }
