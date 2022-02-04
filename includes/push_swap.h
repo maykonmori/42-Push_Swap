@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/31 13:20:38 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/03 14:40:23 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # define INT_MIN -2147483648
 # define STOP 2147483648
 
+typedef struct s_slice
+{
+	int	*chunks;
+	int	size;
+}	t_slice;
+
 typedef struct s_stack
 {
 	int	*stack;
@@ -32,18 +38,19 @@ typedef struct s_stack
 
 typedef struct s_data
 {
-	int	index;
+	int			index;
 	t_stack		*stack_a;
 	t_stack		*stack_b;
 	t_stack		*stack_aux;
-	int		num_lower;
-	int		num_higher;
-	int		numb_lower;
-	int		numb_higher;
-	int		direction;
-	int		size;
-	char	*res_step;
-	int		steps;
+	t_slice		*slice;
+	int			num_lower;
+	int			num_higher;
+	int			numb_lower;
+	int			numb_higher;
+	int			direction;
+	int			size;
+	char		*res_step;
+	int			steps;
 }	t_data;
 
 int		ft_misdigit(char c);
@@ -67,5 +74,9 @@ int		is_sorted(t_stack *stack);
 void	sort_stack(t_data *conjunct, t_stack *stack);
 char	*insert_command(char const *s1, char const *s2);
 void	sort_long(t_data *conjunct, t_stack * stack);
+int 	locate_lower(t_data *conjunct);
+void	bubble_sort(int *tab, int size);
+void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower);
+
 
 #endif

@@ -6,7 +6,7 @@
 #    By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:06:31 by mjose-ye          #+#    #+#              #
-#    Updated: 2022/01/30 11:07:05 by mjose-ye         ###   ########.fr        #
+#    Updated: 2022/02/02 10:17:52 by mjose-ye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ OBJS	= ${SRC:%.c=%.o} ${UTILS:%.c=%.o}
 
 CC = gcc -g
 
-# CFLAGS = -Wextra -Werror -Wall
+# CFLAGS = -Wextra -Werror -Wall -fsanitize=leak
 
 .c.o:
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@

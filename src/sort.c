@@ -6,11 +6,13 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 15:54:56 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/30 18:32:51 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/01 21:31:51 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	sort_short(t_data *conjunct, t_stack *stack);
 
 int	is_sorted(t_stack *stack)
 {
@@ -46,50 +48,48 @@ int	is_sortedb(t_stack *stack)
 	return (1);
 }
 
-static void sort_short_b(t_data *conjunct, t_stack *stack)
+static void sort_short_extended(t_data *conjunct, t_stack *stack)
 {
-	while (1)
-	{
-		if(is_sortedb)
-		{
-			while (conjunct->stack_b->top != -1)
-				operations("pa\n", conjunct, stack);
-			break ;
-		}
-		if (conjunct->stack_b->stack[conjunct->stack_b->top] != conjunct->numb_higher)
-			operations("rb\n", conjunct, stack);
-		else if (conjunct->stack_b->stack[0] != conjunct->numb_lower)
-			operations("rrb\n", conjunct, stack);
-		else if (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1])
-			operations("sb\n", conjunct, stack);
-	}
+	int pos_lower;
+	int middle;
 
+	middle = conjunct->stack_a->top + 1 / 2;
+	pos_lower = locate_lower(conjunct) + 1;
+		if (pos_lower < middle)
+			while (conjunct->stack_a->stack[conjunct->stack_a->top] != conjunct->num_lower)
+				operations("rra\n", conjunct, stack);
+		else
+		{
+			while (conjunct->stack_a->stack[conjunct->stack_a->top] != conjunct->num_lower)
+				operations("ra\n", conjunct, stack);
+		}
+	operations("pb\n", conjunct, stack);
+	// sort_short(conjunct, stack);
 }
 
 
 static void	sort_short(t_data *conjunct, t_stack *stack)
 {
-	while(1)
+	while(!is_sorted(conjunct->stack_a))
+	{
+		conjunct->num_lower = get_lower(conjunct->stack_a);
+		if	(conjunct->stack_a->top > 2)
+			sort_short_extended(conjunct, stack);
+		if (conjunct->stack_a->top <= 2)
 		{
-			if(is_sorted(conjunct->stack_a))
-			{
-				if(conjunct->stack_b->top == -1)
-					break;
-				else
-					sort_short_b(conjunct, stack);
-			}
-			else if (conjunct->stack_a->stack[conjunct->stack_a->top] == \
-			conjunct->num_higher)
-				operations("ra\n", conjunct, stack);
-			else if (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1] && conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1] && conjunct->stack_b->stack[conjunct->stack_b->top] != conjunct->numb_higher)
-				operations("ss\n", conjunct, stack);
+			if (conjunct->stack_a->stack[conjunct->stack_a->top] == conjunct->num_higher)
+			operations("ra\n", conjunct, stack);
 			else if (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1])
 				operations("sa\n", conjunct, stack);
-			else if (conjunct->stack_a->stack[conjunct->stack_a->top]!= conjunct->num_higher)
-				operations("pb\n", conjunct, stack);
 			else
-				operations("rr\n", conjunct, stack);
+				operations("rra\n", conjunct, stack);
 		}
+	}
+	while (conjunct->stack_b->top != -1)
+	{
+		operations("pa\n", conjunct, stack);
+	}
+
 }
 
 
@@ -103,37 +103,4 @@ void	sort_stack(t_data *conjunct, t_stack *stack)
 	{
 		sort_long(conjunct, stack);
 	}
-
 }
-
-// static void	sort_short(t_data *conjunct, t_stack *stack)
-// {
-// 	int i, j;
-// 	int stack_a;
-
-// 	stack_a = conjunct->stack_a->stack;
-// 	stack_b = conjunct->stack_b->stack;
-// 	while(1)
-// 	{
-// 		i = conjunct->stack_a->top;
-// 		j = conjunct->stack_b->top;
-// 		if(is_sorted(conjunct->stack_a))
-// 		{
-// 			if(j == -1)
-// 				break;
-// 			else
-// 				sort_short_b(conjunct, stack);
-// 		}
-// 		else if (stack_a[i] == \
-// 		conjunct->num_higher)
-// 			operations("ra\n", conjunct, stack);
-// 		else if (stack_a[i] > stack_a[i - 1] && conjunct->stack_b->stack[j] < conjunct->stack_b->stack[j - 1] && conjunct->stack_b->stack[j] != conjunct->numb_higher)
-// 			operations("ss\n", conjunct, stack);
-// 		else if (stack_a[i] > stack_a[i - 1])
-// 			operations("sa\n", conjunct, stack);
-// 		else if (stack_a[i] != conjunct->num_lower || stack_a[i]!= conjunct->num_higher)
-// 			operations("pb\n", conjunct, stack);
-// 		else
-// 			operations("rr\n", conjunct, stack);
-// 	}
-// }

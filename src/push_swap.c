@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/31 14:55:05 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/03 22:12:30 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	push_swap(t_data *conjunct, t_stack *stack)
 
 void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
 {
-
+	t_slice *slice;
 	conjunct->index = 0;
 	conjunct->steps = 0;
 	conjunct->res_step = NULL;
 	conjunct->size = argc - 1;
+	conjunct->slice = (t_slice *)ft_calloc(sizeof(t_slice), 1);
+	conjunct->slice->size = 0;
 	stack->stack = (int *)ft_calloc(sizeof(int), (conjunct->size + 1));
 	conjunct->stack_a = (t_stack *)ft_calloc(sizeof(t_stack), 1);
 	conjunct->stack_a->stack = (int *)ft_calloc(sizeof(int), (conjunct->size + 1));
@@ -32,7 +34,11 @@ void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
 	conjunct->stack_b = (t_stack *)ft_calloc(sizeof(t_stack), 1);
 	conjunct->stack_b->stack = (int *)ft_calloc(sizeof(int), (conjunct->size + 1));
 	conjunct->stack_b->top = -1;
+	conjunct->stack_aux = (t_stack *)ft_calloc(sizeof(t_stack), 1);
+	conjunct->stack_aux->stack = (int *)ft_calloc(sizeof(int), (conjunct->size + 1));
+	conjunct->stack_aux->top = -1;
 	conjunct->stack_a->stack = atribute_stack(conjunct, conjunct->stack_a, argv);
+	conjunct->stack_aux->stack = atribute_stack(conjunct, conjunct->stack_aux, argv);
 	conjunct->num_lower = get_lower(conjunct->stack_a);
 	conjunct->num_higher = get_higher(conjunct->stack_a);
 	conjunct->numb_lower = get_lower(conjunct->stack_b);
@@ -51,7 +57,6 @@ int main(int argc, char **argv)
 	argc--;
 	if (args_validation(argc, argv))
 	{
-		// write(2, "\033[31mERROR \e[0m\n", 17);
 		write(2, "Error\n", 6);
 		return(1);
 	}
