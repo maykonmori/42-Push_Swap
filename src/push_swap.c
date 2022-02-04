@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:37 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/03 22:12:30 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:20:31 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack)
 	conjunct->stack_aux->stack = atribute_stack(conjunct, conjunct->stack_aux, argv);
 	conjunct->num_lower = get_lower(conjunct->stack_a);
 	conjunct->num_higher = get_higher(conjunct->stack_a);
-	conjunct->numb_lower = get_lower(conjunct->stack_b);
-	conjunct->numb_higher = get_higher(conjunct->stack_b);
 	return (conjunct);
 }
 

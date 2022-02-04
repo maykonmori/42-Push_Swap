@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/03 23:00:28 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/04 18:44:16 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int locate_lower(t_data *conjunct)
 	return(i);
 }
 
-int locate_next_up(t_data *conjunct, int higher)
+int locate_next_down(t_data *conjunct, int higher)
 {
 	int i;
 
@@ -97,7 +97,7 @@ int locate_next_up(t_data *conjunct, int higher)
 	return(i);
 }
 
-int locate_next_down(t_data *conjunct, int higher)
+int locate_next_up(t_data *conjunct, int higher)
 {
 	int i;
 
@@ -112,18 +112,18 @@ int locate_next_down(t_data *conjunct, int higher)
 	return(i);
 }
 
-// static int locate_higher(t_data *conjunct)
-// {
-// 	int i;
+static int locate_higher_b(t_data *conjunct)
+{
+	int i;
 
-// 	i = conjunct->stack_a->top;
+	i = conjunct->stack_b->top;
 
-// 	while (conjunct->stack_a->stack[i] != conjunct->num_higher)
-// 	{
-// 		i--;
-// 	}
-// 	return(i);
-// }
+	while (conjunct->stack_b->stack[i] != conjunct->numb_higher)
+	{
+		i--;
+	}
+	return(i);
+}
 
 static int test_negative(int c)
 {
@@ -134,20 +134,49 @@ static int test_negative(int c)
 
 static void sort_long_b(t_data *conjunct, t_stack *stack)
 {
-	while (conjunct->stack_b->stack[0] != conjunct->numb_lower)
-	{
-		operations("rrb\n", conjunct, stack);
-	}
+	int middle;
+	int higher;
+	int pos_higher;
+
 	while (conjunct->stack_b->top != -1)
 	{
-		operations("pa\n", conjunct, stack);
-		conjunct->num_lower = get_lower(conjunct->stack_a);
-		conjunct->num_higher = get_higher(conjunct->stack_a);
-		if (conjunct->stack_a->stack[0] != conjunct->num_higher)
+		middle = conjunct->stack_b->top / 2;
+		conjunct->numb_higher = get_higher(conjunct->stack_b);
+		pos_higher = locate_higher_b(conjunct);
+		if(pos_higher > middle)
 		{
-			operations("ra\n", conjunct, stack);
+			while (conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top])
+			{
+				if((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]) &&
+				(conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+					operations("rb\n", conjunct, stack);
+				else if ((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]) && (conjunct->numb_higher == conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+					operations("sb\n", conjunct, stack);
+			}
 		}
+		else if (pos_higher < middle)
+		{
+			while (conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top])
+			{
+				operations("rrb\n", conjunct, stack);
+			}
+		}
+		operations("pa\n", conjunct, stack);
 	}
+	// while (conjunct->stack_b->stack[0] != conjunct->numb_lower)
+	// {
+	// 	operations("rrb\n", conjunct, stack);
+	// }
+	// while (conjunct->stack_b->top != -1)
+	// {
+	// 	operations("pa\n", conjunct, stack);
+	// 	conjunct->num_lower = get_lower(conjunct->stack_a);
+	// 	conjunct->num_higher = get_higher(conjunct->stack_a);
+	// 	if (conjunct->stack_a->stack[0] != conjunct->num_higher)
+	// 	{
+	// 		operations("ra\n", conjunct, stack);
+	// 	}
+	// }
 }
 
 void sort_long(t_data *conjunct, t_stack * stack)
@@ -163,14 +192,16 @@ void sort_long(t_data *conjunct, t_stack * stack)
 	conjunct->slice->chunks = set_slice(conjunct->stack_aux->stack, conjunct->slice->chunks, conjunct->slice->size, conjunct->stack_a);
 	i = 0;
 	lower = conjunct->num_lower;
-	while (!is_sorted(conjunct->stack_a) && (conjunct->stack_b->top > -1))
+	while (!is_sorted(conjunct->stack_a))
 	{
 		setting_push(conjunct, stack, conjunct->slice->chunks[i], lower);
 		lower = conjunct->slice->chunks[i];
 		i++;
+		if (conjunct->stack_a->top == -1)
+		{
+			sort_long_b(conjunct, stack);
+		}
 	}
-	// while (conjunct->stack_b->top > -1)
-	// 	sort_long_b(conjunct, stack);
 }
 
 void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
@@ -210,10 +241,10 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
-			{
-				operations("sb\n", conjunct, stack);
-			}
+			// if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			// {
+			// 	operations("sb\n", conjunct, stack);
+			// }
 		}
 		else
 		{
@@ -236,11 +267,13 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
-			{
-				operations("sb\n", conjunct, stack);
-			}
+			// if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			// {
+			// 	operations("sb\n", conjunct, stack);
+			// }
 		}
+		if (conjunct->stack_a->top == -1)
+			loop = -1;
 		loop--;
 	}
 }
