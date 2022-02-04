@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/04 18:44:16 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:09:03 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void sort_long(t_data *conjunct, t_stack * stack)
 	int lower;
 	int i;
 
-	conjunct->slice = (t_slice *)ft_calloc(sizeof(t_slice), 1);
+	// conjunct->slice = (t_slice *)ft_calloc(sizeof(t_slice), 1);
 	conjunct->slice->size = setting_slice_size(conjunct);
 	bubble_sort(conjunct->stack_aux->stack, conjunct->stack_aux->top);
 	conjunct->slice->chunks = set_slice(conjunct->stack_aux->stack, conjunct->slice->chunks, conjunct->slice->size, conjunct->stack_a);
@@ -202,6 +202,7 @@ void sort_long(t_data *conjunct, t_stack * stack)
 			sort_long_b(conjunct, stack);
 		}
 	}
+	free(conjunct->slice->chunks);
 }
 
 void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
@@ -241,10 +242,10 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			// if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
-			// {
-			// 	operations("sb\n", conjunct, stack);
-			// }
+			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			{
+				operations("sb\n", conjunct, stack);
+			}
 		}
 		else
 		{
@@ -267,10 +268,10 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			// if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
-			// {
-			// 	operations("sb\n", conjunct, stack);
-			// }
+			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			{
+				operations("sb\n", conjunct, stack);
+			}
 		}
 		if (conjunct->stack_a->top == -1)
 			loop = -1;

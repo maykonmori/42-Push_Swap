@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/01 22:06:51 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/04 20:06:30 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,14 @@ long	ft_matoi(const char *str)
 void	free_all(t_data *conjunct, t_stack *stack, int error)
 {
 	free(stack->stack);
+	free(conjunct->stack_a->stack);
 	free(conjunct->stack_a);
+	free(conjunct->stack_b->stack);
 	free(conjunct->stack_b);
+	free(conjunct->stack_aux->stack);
+	free(conjunct->stack_aux);
+	free(conjunct->res_step);
+	free(conjunct->slice);
 	free(conjunct);
 	free(stack);
 

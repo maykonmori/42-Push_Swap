@@ -26,6 +26,7 @@ static void	double_operation(char *op, t_data *conjunct, t_stack *stack)
 
 void	 operations(char *op, t_data *conjunct, t_stack *stack)
 {
+	char *temp;
 
 	if (!ft_strncmp(op, "sa\n", 3))
 		swap(conjunct->stack_a);
@@ -48,6 +49,11 @@ void	 operations(char *op, t_data *conjunct, t_stack *stack)
 	if (conjunct->res_step == NULL)
 		conjunct->res_step = op;
 	else
-		conjunct->res_step = ft_strjoin(conjunct->res_step, op);
+	{
+		temp = ft_strjoin(conjunct->res_step, op);
+		if (ft_strlen(conjunct->res_step) > 4)
+			free(conjunct->res_step);
+		conjunct->res_step = temp;
+	}
 	conjunct->steps++;
 }
