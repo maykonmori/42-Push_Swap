@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/04 20:09:03 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/05 10:55:59 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,8 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 			}
 			else
 			{
-				i = conjunct->stack_a->top - next_up;
+
+				i = next_up + 1;
 				while (i > 0)
 				{
 					operations("rra\n", conjunct, stack);
@@ -260,7 +261,7 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 			}
 			else
 			{
-				i = conjunct->stack_a->top - next_down;
+				i = next_down + 1;
 				while (i > 0)
 				{
 					operations("rra\n", conjunct, stack);
