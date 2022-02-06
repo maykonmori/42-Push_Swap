@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/05 10:55:59 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:43:39 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	setting_slice_size(t_data *conjunct)
 {
-	conjunct->slice->size = 9;
+	conjunct->slice->size = 18;
 	if (conjunct->stack_a->top >= 400)
-		conjunct->slice->size = 29;
+		conjunct->slice->size = 43;
 	return (conjunct->slice->size);
 }
 
@@ -143,7 +143,7 @@ static void sort_long_b(t_data *conjunct, t_stack *stack)
 		middle = conjunct->stack_b->top / 2;
 		conjunct->numb_higher = get_higher(conjunct->stack_b);
 		pos_higher = locate_higher_b(conjunct);
-		if(pos_higher > middle)
+		if(pos_higher >= middle)
 		{
 			while (conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top])
 			{
@@ -192,16 +192,13 @@ void sort_long(t_data *conjunct, t_stack * stack)
 	conjunct->slice->chunks = set_slice(conjunct->stack_aux->stack, conjunct->slice->chunks, conjunct->slice->size, conjunct->stack_a);
 	i = 0;
 	lower = conjunct->num_lower;
-	while (!is_sorted(conjunct->stack_a))
+	while (!is_sorted(conjunct->stack_a) && conjunct->stack_a->top > -1)
 	{
 		setting_push(conjunct, stack, conjunct->slice->chunks[i], lower);
 		lower = conjunct->slice->chunks[i];
 		i++;
-		if (conjunct->stack_a->top == -1)
-		{
-			sort_long_b(conjunct, stack);
-		}
 	}
+	sort_long_b(conjunct, stack);
 	free(conjunct->slice->chunks);
 }
 
@@ -212,7 +209,10 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 	int i;
 	int loop;
 
-	loop = conjunct->slice->size;
+	if (higher == conjunct->slice->chunks[0])
+		loop = conjunct->slice->size;
+	else
+		loop = conjunct->slice->size - 1;
 
 	while(loop > -1)
 	{
@@ -228,7 +228,13 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				i = conjunct->stack_a->top - next_up;
 				while (i > 0)
 				{
-					operations("ra\n", conjunct, stack);
+					conjunct->numb_higher = get_higher(conjunct->stack_b);
+					if((i > 1) && (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1]))
+						operations("sa\n", conjunct, stack);
+					if((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]))
+						operations("rr\n", conjunct, stack);
+					else
+						operations("ra\n", conjunct, stack);
 					i--;
 				}
 			}
@@ -238,12 +244,20 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				i = next_up + 1;
 				while (i > 0)
 				{
-					operations("rra\n", conjunct, stack);
+					conjunct->numb_higher = get_higher(conjunct->stack_b);
+					if((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]))
+						operations("rrr\n", conjunct, stack);
+					else
+						operations("rra\n", conjunct, stack);
 					i--;
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			if ((conjunct->stack_b->top > 1) && (conjunct->stack_a->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]) && (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1]))
+			{
+				operations("ss\n", conjunct, stack);
+			}
+			else if((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
 			{
 				operations("sb\n", conjunct, stack);
 			}
@@ -255,7 +269,11 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				i = conjunct->stack_a->top - next_down;
 				while (i > 0)
 				{
-					operations("ra\n", conjunct, stack);
+					conjunct->numb_higher = get_higher(conjunct->stack_b);
+					if((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]))
+						operations("rr\n", conjunct, stack);
+					else
+						operations("ra\n", conjunct, stack);
 					i--;
 				}
 			}
@@ -264,12 +282,20 @@ void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
 				i = next_down + 1;
 				while (i > 0)
 				{
-					operations("rra\n", conjunct, stack);
+					conjunct->numb_higher = get_higher(conjunct->stack_b);
+					if((conjunct->numb_higher != conjunct->stack_b->stack[conjunct->stack_b->top]))
+						operations("rrr\n", conjunct, stack);
+					else
+						operations("rra\n", conjunct, stack);
 					i--;
 				}
 			}
 			operations("pb\n", conjunct, stack);
-			if ((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
+			if ((conjunct->stack_b->top > 1) && (conjunct->stack_a->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]) && (conjunct->stack_a->stack[conjunct->stack_a->top] > conjunct->stack_a->stack[conjunct->stack_a->top - 1]))
+			{
+				operations("ss\n", conjunct, stack);
+			}
+			else if((conjunct->stack_b->top > 1) && (conjunct->stack_b->stack[conjunct->stack_b->top] < conjunct->stack_b->stack[conjunct->stack_b->top - 1]))
 			{
 				operations("sb\n", conjunct, stack);
 			}
