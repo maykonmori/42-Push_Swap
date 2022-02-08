@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/03 14:40:23 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/08 00:17:09 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef struct s_stack
 {
 	int	*stack;
 	int	top;
-} t_stack;
-
+}	t_stack;
 
 typedef struct s_data
 {
@@ -64,7 +63,7 @@ void	push(t_stack *stack_src, t_stack *stack_dest);
 void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	rrotate(t_stack *stack);
-void	 operations(char *op, t_data *conjunct, t_stack *stack) ;
+void	operations(char *op, t_data *conjunct, t_stack *stack);
 void	free_all(t_data *conjunct, t_stack *stack, int error);
 int		get_lower(t_stack *stack);
 int		get_higher(t_stack *stack);
@@ -72,11 +71,10 @@ int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
 void	push_swap(t_data *conjunct, t_stack *stack);
 int		is_sorted(t_stack *stack);
 void	sort_stack(t_data *conjunct, t_stack *stack);
-char	*insert_command(char const *s1, char const *s2);
-void	sort_long(t_data *conjunct, t_stack * stack);
-int 	locate_lower(t_data *conjunct);
+void	insert_command(char *op, t_data *conjunct);
+void	sort_long(t_data *conjunct, t_stack *stack);
+int		locate_lower(t_data *conjunct);
 void	bubble_sort(int *tab, int size);
-void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower);
-
+void	setting_push(t_data *conjunct, t_stack *stack, int higher);
 
 #endif

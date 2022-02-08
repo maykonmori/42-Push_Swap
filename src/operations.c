@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   operations.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/08 00:10:03 by mjose-ye          #+#    #+#             */
+/*   Updated: 2022/02/08 00:16:36 by mjose-ye         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	double_operation(char *op, t_data *conjunct, t_stack *stack)
@@ -19,15 +31,22 @@ static void	double_operation(char *op, t_data *conjunct, t_stack *stack)
 	}
 	else
 	{
-			write(2, "\033[31mERROR \e[0m\n", 17);
-			free_all(conjunct, stack, EXIT_FAILURE);
+		write(2, "\033[31mERROR \e[0m\n", 17);
+		free_all(conjunct, stack, EXIT_FAILURE);
 	}
 }
 
-void	 operations(char *op, t_data *conjunct, t_stack *stack)
+void	insert_command(char *op, t_data *conjunct)
 {
-	char *temp;
+	char	*temp;
 
+	temp = ft_strjoin(conjunct->res_step, op);
+	free(conjunct->res_step);
+	conjunct->res_step = temp;
+}
+
+void	operations(char *op, t_data *conjunct, t_stack *stack)
+{
 	if (!ft_strncmp(op, "sa\n", 3))
 		swap(conjunct->stack_a);
 	else if (!ft_strncmp(op, "sb\n", 3))
@@ -47,13 +66,8 @@ void	 operations(char *op, t_data *conjunct, t_stack *stack)
 	else
 		double_operation(op, conjunct, stack);
 	if (conjunct->res_step == NULL)
-		conjunct->res_step = op;
+		conjunct->res_step = ft_strdup(op);
 	else
-	{
-		temp = ft_strjoin(conjunct->res_step, op);
-		if (ft_strlen(conjunct->res_step) > 4)
-			free(conjunct->res_step);
-		conjunct->res_step = temp;
-	}
+		insert_command(op, conjunct);
 	conjunct->steps++;
 }

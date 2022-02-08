@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/04 20:06:30 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/07 23:52:49 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	free_all(t_data *conjunct, t_stack *stack, int error)
 	free(conjunct->slice);
 	free(conjunct);
 	free(stack);
-
 	if (error == EXIT_FAILURE)
 		exit(1);
 	exit(0);

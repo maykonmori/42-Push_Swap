@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 20:22:42 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/05 21:43:39 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/07 23:32:15 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ static int test_negative(int c)
 static void sort_long_b(t_data *conjunct, t_stack *stack)
 {
 	int middle;
-	int higher;
 	int pos_higher;
 
 	while (conjunct->stack_b->top != -1)
@@ -181,9 +180,7 @@ static void sort_long_b(t_data *conjunct, t_stack *stack)
 
 void sort_long(t_data *conjunct, t_stack * stack)
 {
-	t_slice *slice;
-	int *aux_order;
-	int lower;
+	// int lower;
 	int i;
 
 	// conjunct->slice = (t_slice *)ft_calloc(sizeof(t_slice), 1);
@@ -191,20 +188,20 @@ void sort_long(t_data *conjunct, t_stack * stack)
 	bubble_sort(conjunct->stack_aux->stack, conjunct->stack_aux->top);
 	conjunct->slice->chunks = set_slice(conjunct->stack_aux->stack, conjunct->slice->chunks, conjunct->slice->size, conjunct->stack_a);
 	i = 0;
-	lower = conjunct->num_lower;
+	// lower = conjunct->num_lower;
 	while (!is_sorted(conjunct->stack_a) && conjunct->stack_a->top > -1)
 	{
-		setting_push(conjunct, stack, conjunct->slice->chunks[i], lower);
-		lower = conjunct->slice->chunks[i];
+		setting_push(conjunct, stack, conjunct->slice->chunks[i]);
+		// lower = conjunct->slice->chunks[i];
 		i++;
 	}
 	sort_long_b(conjunct, stack);
 	free(conjunct->slice->chunks);
 }
 
-void setting_push(t_data *conjunct, t_stack *stack, int higher, int lower)
+void setting_push(t_data *conjunct, t_stack *stack, int higher)
 {
-	int middle, pos_lower, pos_higher;
+	int middle;
 	int next_up, next_down;
 	int i;
 	int loop;

@@ -6,31 +6,30 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 20:03:43 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/01/23 15:28:28 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/07 23:52:00 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int is_number(int argc, char **argv)
+int	is_number(int argc, char **argv)
 {
-	int index;
+	int	index;
 
 	index = argc - 1;
 	while (index > -1)
 	{
-		if(!ft_misdigit(*argv[index]))
+		if (!ft_misdigit(*argv[index]))
 			return (TRUE);
 		index--;
 	}
-
 	return (FALSE);
 }
 
-int is_duplicate(int argc, char **argv)
+int	is_duplicate(int argc, char **argv)
 {
-	int index;
-	int position;
+	int	index;
+	int	position;
 
 	index = argc - 1;
 	position = index - 1;
@@ -45,31 +44,31 @@ int is_duplicate(int argc, char **argv)
 		index--;
 		position = index - 1;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
-int is_integer(int argc, char **argv)
+int	is_integer(int argc, char **argv)
 {
-	long int num;
-	int position;
+	long int	num;
+	int			position;
 
 	position = argc - 1;
-	while(position > -1)
+	while (position > -1)
 	{
 		num = ft_matoi(argv[position]);
-		if(num < INT_MIN || num > INT_MAX)
+		if (num < INT_MIN || num > INT_MAX)
 		{
-			return(TRUE);
+			return (TRUE);
 		}
 		position--;
 	}
-	return(FALSE);
+	return (FALSE);
 }
 
-int args_validation(int argc, char **argv)
+int	args_validation(int argc, char **argv)
 {
 	if (is_number(argc, argv) && is_duplicate(argc, argv) \
 	&& is_integer(argc, argv))
 		return (TRUE);
-	return(FALSE);
+	return (FALSE);
 }
