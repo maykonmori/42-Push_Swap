@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 17:08:09 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/07 23:52:49 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:14:21 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,69 +44,33 @@ long	ft_matoi(const char *str)
 	return (sign * resu);
 }
 
-void	free_all(t_data *conjunct, t_stack *stack, int error)
+int	con_negative(int c)
 {
-	free(stack->stack);
-	free(conjunct->stack_a->stack);
-	free(conjunct->stack_a);
-	free(conjunct->stack_b->stack);
-	free(conjunct->stack_b);
-	free(conjunct->stack_aux->stack);
-	free(conjunct->stack_aux);
-	free(conjunct->res_step);
-	free(conjunct->slice);
-	free(conjunct);
-	free(stack);
-	if (error == EXIT_FAILURE)
-		exit(1);
-	exit(0);
+	if (c < 0)
+		c = c * -1;
+	return (c);
 }
 
-int	get_higher(t_stack *stack)
+void	bubble_sort(int *tab, int size)
 {
 	int	i;
-	int	aux;
+	int	j;
+	int	temp;
 
-	i = stack->top;
-	aux = stack->stack[i];
-	while (i > -1)
+	i = size;
+	while (i >= 0)
 	{
-		if (stack->stack[i] > aux)
-			aux = stack->stack[i];
-		--i;
+		j = i - 1;
+		while (j >= 0)
+		{
+			if (tab[i] > tab[j])
+			{
+				temp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = temp;
+			}
+			j--;
+		}
+		i--;
 	}
-	return (aux);
-}
-
-int	get_lower(t_stack *stack)
-{
-	int	i;
-	int	aux;
-
-	i = stack->top;
-	aux = stack->stack[i];
-	while (i > -1)
-	{
-		if (stack->stack[i] < aux)
-			aux = stack->stack[i];
-		--i;
-	}
-	return (aux);
-}
-
-int	*atribute_stack(t_data *conjunct, t_stack *stack, char **argv)
-{
-	int	i;
-	int	size;
-
-	size = conjunct->size;
-	i = 0;
-	while (size >= 0)
-	{
-		stack->stack[size] = ft_atoi(argv[i]);
-		size--;
-		stack->top++;
-		i++;
-	}
-	return (stack->stack);
 }

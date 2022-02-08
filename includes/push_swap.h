@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 12:06:27 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/08 00:17:09 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/08 13:14:21 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,43 @@ typedef struct s_data
 	int			steps;
 }	t_data;
 
+void	push_swap(t_data *conjunct, t_stack *stack);
+void	sort_stack(t_data *conjunct, t_stack *stack);
+
+void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack);
+int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
+
 int		ft_misdigit(char c);
 long	ft_matoi(const char *str);
+int		con_negative(int c);
+void	bubble_sort(int *tab, int size);
+
+int		is_sorted(t_stack *stack);
 int		is_number(int argc, char **argv);
 int		is_duplicate(int argc, char **argv);
 int		is_integer(int argc, char **argv);
 int		args_validation(int argc, char **argv);
-void	*init(int argc, char **argv, t_data *conjunct, t_stack *stack);
+
 void	push(t_stack *stack_src, t_stack *stack_dest);
 void	swap(t_stack *stack);
 void	rotate(t_stack *stack);
 void	rrotate(t_stack *stack);
+
 void	operations(char *op, t_data *conjunct, t_stack *stack);
-void	free_all(t_data *conjunct, t_stack *stack, int error);
+
+void	sort_short(t_data *conjunct, t_stack *stack);
+void	sort_long(t_data *conjunct, t_stack *stack);
+void	setting_push(t_data *conjunct, t_stack *stack, int higher);
+void	sort_long_b(t_data *conjunct, t_stack *stack);
+
+int		locate_higher_b(t_data *conjunct);
+int		locate_lower(t_data *conjunct);
+int		locate_next_up(t_data *conjunct, int higher);
+int		locate_next_down(t_data *conjunct, int higher);
+
 int		get_lower(t_stack *stack);
 int		get_higher(t_stack *stack);
-int		*atribute_stack(t_data *conjunct, t_stack *stack, char **argv);
-void	push_swap(t_data *conjunct, t_stack *stack);
-int		is_sorted(t_stack *stack);
-void	sort_stack(t_data *conjunct, t_stack *stack);
-void	insert_command(char *op, t_data *conjunct);
-void	sort_long(t_data *conjunct, t_stack *stack);
-int		locate_lower(t_data *conjunct);
-void	bubble_sort(int *tab, int size);
-void	setting_push(t_data *conjunct, t_stack *stack, int higher);
+
+void	free_all(t_data *conjunct, t_stack *stack, int error);
 
 #endif

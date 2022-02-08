@@ -6,7 +6,7 @@
 #    By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/11 12:06:31 by mjose-ye          #+#    #+#              #
-#    Updated: 2022/02/07 23:36:18 by mjose-ye         ###   ########.fr        #
+#    Updated: 2022/02/08 12:56:01 by mjose-ye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,13 @@ SRC =	$(addprefix $(FOLDER), \
 		operations.c \
 		rules.c \
 		sort.c\
-		long_sort.c)
+		long_sort.c\
+		free.c\
+		init.c\
+		get_numbers.c\
+		locate_numbers.c\
+		long_sort_b.c\
+		long_sort_a.c)
 
 OBJS	= ${SRC:%.c=%.o} ${UTILS:%.c=%.o}
 

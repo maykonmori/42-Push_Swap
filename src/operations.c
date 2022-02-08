@@ -6,7 +6,7 @@
 /*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/08 00:10:03 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/02/08 00:16:36 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/02/08 11:46:00 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	double_operation(char *op, t_data *conjunct, t_stack *stack)
 	}
 }
 
-void	insert_command(char *op, t_data *conjunct)
+static void	insert_command(char *op, t_data *conjunct)
 {
 	char	*temp;
 
